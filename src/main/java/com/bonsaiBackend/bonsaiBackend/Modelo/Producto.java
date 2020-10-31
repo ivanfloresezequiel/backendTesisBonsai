@@ -1,4 +1,8 @@
 package com.bonsaiBackend.bonsaiBackend.Modelo;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -29,13 +33,15 @@ public class Producto {
     private int stockMinimo;
     @Column
     private Date fechaVencimiento;
-    @Column
-    private int categoriaID;
+    @ManyToOne
+    @JoinColumn (name = "categoria_id")
+
+    private Categoria categoriaID;
 
     public Producto (int codigoBarra, Date fechaBaja, Date fechaLimiteVencimiento,
                      String presentacion, String productoDescripcion, String productoInformacion,
                      String nombre, int stockActual, int stockMinimo, Date fechaVencimiento,
-                     int categoriaID){
+                     Categoria categoriaID){
         codigoBarra = this.codigoBarra;
         fechaBaja = this.fechaBaja;
         fechaLimiteVencimiento = this.fechaLimiteVencimiento;
@@ -50,54 +56,91 @@ public class Producto {
     }
 
     public Producto(){}
-
+    public void setId_producto (int id_producto){
+        this.id_producto = id_producto;
+    }
     public void setCodigoBarra(int codigoBarra){
+
         this.codigoBarra = codigoBarra;
     }
     public void setFechaBaja (Date fechaBaja){
+
         this.fechaBaja = fechaBaja;
     }
     public void setFechaLimiteVencimiento (Date fechaLimiteVencimiento){
+
         this.fechaLimiteVencimiento = fechaLimiteVencimiento;
     }
     public void setPresentacion (String presentacion){
+
         this.presentacion = presentacion;
     }
     public void setProductoDescripcion (String productoDescripcion){
+
         this.productoDescripcion = productoDescripcion;
     }
     public void setProductoInformacion (String productoInformacion){
+
         this.productoInformacion = productoInformacion;
     }
     public void setNombre (String nombre){
+
         this.nombre = nombre;
     }
 
-    public void setCategoriaID(int categoriaID) {
+    public void setCategoriaID(Categoria categoriaID) {
+
         this.categoriaID = categoriaID;
     }
 
     public void setStockActual (int stockActual){
+
         this.stockActual = stockActual;
     }
     public void setStockMinimo (int stockMinimo){
+
         this.stockMinimo = stockMinimo;
     }
     public void setFechaVencimiento (Date fechaVencimiento){
+
         this.fechaVencimiento = fechaVencimiento;
     }
-    public int getId_producto (){return id_producto;}
-    public int getCodigoBarra (){return codigoBarra;}
-    public int getStockActual(){return stockActual;}
-    public int getStockMinimo(){return stockMinimo;}
-    public int getCategoriaID(){return categoriaID;}
-    public String getPresentacion(){return presentacion;}
-    public String getProductoDescripcion(){return productoDescripcion;}
-    public String getProductoInformacion(){return productoInformacion;}
-    public String getNombre(){return nombre;}
-    public Date getFechaBaja(){return fechaBaja;}
-    public Date getFechaLimiteVencimiento(){return fechaLimiteVencimiento;}
-    public Date getFechaVencimiento(){return fechaVencimiento;}
+    public int getId_producto (){
+        return id_producto;
+    }
+    public int getCodigoBarra (){
+        return codigoBarra;
+    }
+    public int getStockActual(){
+        return stockActual;
+    }
+    public int getStockMinimo(){
+        return stockMinimo;
+    }
+    public Categoria getCategoriaID(){
+        return categoriaID;
+    }
+    public String getPresentacion(){
+        return presentacion;
+    }
+    public String getProductoDescripcion(){
+        return productoDescripcion;
+    }
+    public String getProductoInformacion(){
+        return productoInformacion;
+    }
+    public String getNombre(){
+        return nombre;
+    }
+    public Date getFechaBaja(){
+        return fechaBaja;
+    }
+    public Date getFechaLimiteVencimiento(){
+        return fechaLimiteVencimiento;
+    }
+    public Date getFechaVencimiento(){
+        return fechaVencimiento;
+    }
 
 
 }
