@@ -15,7 +15,16 @@ import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
 public class CategoriaControlador {
     @Autowired
     CategoriaServicio categoriaServicio;
+/*
+    @GetMapping
+    public ResponseEntity<Response> listar()  {
+        Response response = null;
 
+            response = categoriaServicio.listarHabilitados();
+        System.out.println(response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    */
     @GetMapping
     public ResponseEntity<Response> listar() throws Exception {
         Response response = null;

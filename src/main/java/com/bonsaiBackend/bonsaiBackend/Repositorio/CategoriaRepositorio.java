@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface CategoriaRepositorio extends JpaRepository<Categoria, Integer>{
     /*Categoria fndById_categoria(int id);*/
+    List<Categoria> findAllByEstadoTrue();
 }
 
 

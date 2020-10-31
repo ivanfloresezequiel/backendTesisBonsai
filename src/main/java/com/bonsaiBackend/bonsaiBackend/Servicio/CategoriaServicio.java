@@ -54,6 +54,14 @@ public class CategoriaServicio {
         response.setData(categoriaGuardado);
         return response;
     }
+    public Response listarHabilitados(){
+        Response response = new Response();
+        List<Categoria> categorias = categoriaRepositorio.findAll();
+        response.setCode(200);
+        response.setMsg("Lista de Categorias");
+        response.setData(categorias);
+        return response;
+    }
     /*public Response actualizarCategoria (Categoria categoria) throws Exception {
         Response response = new Response();
         Categoria categoriaToUpdate = categoriaRepositorio.fndById_categoria(categoria.getId_categoria());

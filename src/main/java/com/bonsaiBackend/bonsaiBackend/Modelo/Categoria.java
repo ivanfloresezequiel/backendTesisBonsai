@@ -14,7 +14,16 @@ public class Categoria {
     private String descripcion;
     @Column
     private String etiqueta;
+    @Column
+    private Boolean estado;
 
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
 
     public Categoria (String descripcion, String etiqueta){
 
