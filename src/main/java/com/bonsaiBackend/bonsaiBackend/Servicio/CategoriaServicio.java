@@ -2,9 +2,9 @@ package com.bonsaiBackend.bonsaiBackend.Servicio;
 
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
-import com.bonsaiBackend.bonsaiBackend.Modelo.ProductoPrueba;
+
 import com.bonsaiBackend.bonsaiBackend.Repositorio.CategoriaRepositorio;
-import com.bonsaiBackend.bonsaiBackend.Repositorio.ProductoRepositorio;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +42,18 @@ public class CategoriaServicio {
         return response;
     }
 
-
+    public Response buscarPorId(int id){
+        Response response= new Response();
+        Optional<Categoria> categoria = categoriaRepositorio.findById(id);
+        response.setData(categoria);
+        return response;
+    }
+    public Response editar(Categoria categoria){
+        Response response = new Response();
+        Categoria categoriaGuardado = categoriaRepositorio.save(categoria);
+        response.setData(categoriaGuardado);
+        return response;
+    }
     /*public Response actualizarCategoria (Categoria categoria) throws Exception {
         Response response = new Response();
         Categoria categoriaToUpdate = categoriaRepositorio.fndById_categoria(categoria.getId_categoria());

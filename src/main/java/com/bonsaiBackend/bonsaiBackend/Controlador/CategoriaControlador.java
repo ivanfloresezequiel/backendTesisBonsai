@@ -32,7 +32,19 @@ public class CategoriaControlador {
         Response response = categoriaServicio.guardarCategoria(categoria);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
 
+        Response response = categoriaServicio.buscarPorId(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    @PutMapping(path={"/{id}"})
+    public ResponseEntity<Response>Editar(@RequestBody Categoria categoria, @PathVariable("id")Integer id){
+        categoria.setId_categoria(id);
+        System.out.println("acavoy");
+        Response response= categoriaServicio.editar(categoria);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
     /*@PutMapping
     public ResponseEntity<Response> actualizar(@RequestBody Categoria categoria) throws Exception {
         Response response = categoriaServicio.actualizarCategoria(categoria);
