@@ -18,8 +18,8 @@ public class Gondola {
     @Column
     private int capacidadMax;
     @Column
-    @JoinColumn(name = "capacidad_min")
-    private int capacidadMIn;
+
+    private int capacidadMin;
     @Column
     private String ubicacion;
     @ManyToOne
@@ -32,7 +32,7 @@ public class Gondola {
     public Gondola (int capacidadMax, int capacidadMin,String ubicacion, TipoGondola tipoGondolaID,
                     ReposicionGondola reposicionGondolaID ){
         capacidadMax = this.capacidadMax;
-        capacidadMin = this.capacidadMIn;
+        capacidadMin = this.capacidadMin;
         ubicacion = this.ubicacion;
         tipoGondolaID = this.tipoGondolaID;
         reposicionGondolaID = this.reposicionGondolaID;
@@ -49,8 +49,8 @@ public class Gondola {
         this.capacidadMax = capacidadMax;
     }
 
-    public void setCapacidadMIn(int capacidadMIn) {
-        this.capacidadMIn = capacidadMIn;
+    public void setCapacidadMin(int capacidadMin) {
+        this.capacidadMin = capacidadMin;
     }
 
     public void setReposicionGondolaID(ReposicionGondola reposicionGondolaID) {
@@ -69,8 +69,8 @@ public class Gondola {
         return capacidadMax;
     }
 
-    public int getCapacidadMIn() {
-        return capacidadMIn;
+    public int getCapacidadMin() {
+        return capacidadMin;
     }
 
     public int getId_gondola() {
