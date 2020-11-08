@@ -18,14 +18,7 @@ public class CategoriaServicio {
     @Autowired
     CategoriaRepositorio categoriaRepositorio;
 
-    public Response ListarHabilitados(){
-        Response response = new Response();
-        List<Categoria> categorias = categoriaRepositorio.findAllByEstadoTrue();
-        response.setCode(200);
-        response.setMsg("Lista de Categorias");
-        response.setData(categorias);
-        return response;
-    }
+
 
     public Response listar() throws Exception {
         Response response = new Response();
@@ -64,14 +57,7 @@ public class CategoriaServicio {
         response.setData(categoriaGuardado);
         return response;
     }
-    public Response listarHabilitados(){
-        Response response = new Response();
-        List<Categoria> categorias = categoriaRepositorio.findAll();
-        response.setCode(200);
-        response.setMsg("Lista de Categorias");
-        response.setData(categorias);
-        return response;
-    }
+
     /*public Response actualizarCategoria (Categoria categoria) throws Exception {
         Response response = new Response();
         Categoria categoriaToUpdate = categoriaRepositorio.fndById_categoria(categoria.getId_categoria());
@@ -88,4 +74,12 @@ public class CategoriaServicio {
         response.setData(categoriaRepositorio.save(categoriaToUpdate));
         return response;
     }*/
+    public Response ListarHabilitados(){
+        Response response = new Response();
+        List<Categoria> categorias = categoriaRepositorio.findAllByEstadoTrue();
+        response.setCode(200);
+        response.setMsg("Lista de Categorias");
+        response.setData(categorias);
+        return response;
+    }
 }

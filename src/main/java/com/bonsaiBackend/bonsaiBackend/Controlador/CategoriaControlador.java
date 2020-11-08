@@ -20,7 +20,7 @@ public class CategoriaControlador {
 
     @GetMapping("/habilitados")
     public ResponseEntity<Response> listarHabilitados()  {
-        Response response = categoriaServicio.listarHabilitados();
+        Response response = categoriaServicio.ListarHabilitados();
         return new ResponseEntity<>(response, HttpStatus.OK);
 
 
