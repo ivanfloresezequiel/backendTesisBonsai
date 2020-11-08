@@ -14,11 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Producto;
 
+import java.io.Serializable;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping({"/proveedores"})
 
-public class ProveedorControlador {
+public class ProveedorControlador  {
     @Autowired
     ProveedorServicio proveedorServicio;
 
@@ -32,7 +34,11 @@ public class ProveedorControlador {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
+@GetMapping("/habilitados")
+public ResponseEntity<Response> listarHabilitados(){
+    Response response = proveedorServicio.buscarHabilitados();
+    return new ResponseEntity<>(response, HttpStatus.OK);
+}
     @PostMapping
     public ResponseEntity<Response> guardarProveedor(@RequestBody Proveedor proveedor) throws Exception {
         Response response = proveedorServicio.guardarProveedor(proveedor);

@@ -6,8 +6,10 @@ public class Response {
     private Object data;
 
 
-    public Response() {
+    public Response(String msg) {
+        this.msg = msg;
     }
+    public Response(){}
 
     public Integer getCode() {
         return code;

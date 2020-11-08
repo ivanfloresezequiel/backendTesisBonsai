@@ -18,6 +18,14 @@ public class CategoriaServicio {
     @Autowired
     CategoriaRepositorio categoriaRepositorio;
 
+    public Response ListarHabilitados(){
+        Response response = new Response();
+        List<Categoria> categorias = categoriaRepositorio.findAllByEstadoTrue();
+        response.setCode(200);
+        response.setMsg("Lista de Categorias");
+        response.setData(categorias);
+        return response;
+    }
 
     public Response listar() throws Exception {
         Response response = new Response();

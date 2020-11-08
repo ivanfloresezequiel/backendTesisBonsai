@@ -2,15 +2,17 @@ package com.bonsaiBackend.bonsaiBackend.Modelo;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="proveedor")
-
-public class Proveedor {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Proveedor implements Serializable {
 
     /*DIRECCION	varchar(200)
     MAIL	varchar(100)
@@ -25,7 +27,7 @@ public class Proveedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_proveedor;
     @Column
-    private int cuit;
+    private double cuit;
     @Column
     private String direccion;
     @Column
@@ -38,9 +40,11 @@ public class Proveedor {
     private String telefono_fijo;
     @Column
     private String whatsapp;
+    @Column
+    private Boolean estado;
 
 
-    public Proveedor(int cuit, String direccion, String mail, String nombre,
+    public Proveedor(double cuit, String direccion, String mail, String nombre,
                      String razon_social, String telefono_fijo,
                      String whatsapp){
             cuit = this.cuit;
@@ -50,11 +54,20 @@ public class Proveedor {
             razon_social = this.razon_social;
             telefono_fijo = this.telefono_fijo;
             whatsapp = this.whatsapp;
+            estado = true;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Boolean getEstado() {
+        return estado;
     }
 
     public Proveedor(){}
 
-    public void setCuit(int cuit) {
+    public void setCuit(double cuit) {
         this.cuit = cuit;
     }
 
@@ -86,7 +99,7 @@ public class Proveedor {
         this.whatsapp = whatsapp;
     }
 
-    public int getCuit() {
+    public double getCuit() {
         return cuit;
     }
 

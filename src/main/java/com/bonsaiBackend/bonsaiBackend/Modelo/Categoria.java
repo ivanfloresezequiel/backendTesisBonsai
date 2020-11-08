@@ -17,22 +17,25 @@ public class Categoria {
     @Column
     private Boolean estado;
 
+
+
+    public Categoria (String descripcion, String etiqueta){
+
+        descripcion = this.descripcion;
+        etiqueta = this.etiqueta;
+        this.estado= true;
+    }
+
+    public Categoria(){
+
+    }
+
     public Boolean getEstado() {
         return estado;
     }
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
-    }
-
-    public Categoria (String descripcion, String etiqueta){
-
-        descripcion = this.descripcion;
-        etiqueta = this.etiqueta;
-    }
-
-    public Categoria(){
-
     }
 
     public void setId_categoria(int id_categoria) {

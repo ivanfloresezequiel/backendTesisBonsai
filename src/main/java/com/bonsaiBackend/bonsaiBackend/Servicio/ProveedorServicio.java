@@ -55,4 +55,12 @@ public class ProveedorServicio {
         response.setData(proveedorRepositorio);
         return response;
     }
+    public Response buscarHabilitados(){
+        Response response = new Response();
+        List<Proveedor> proveedores = proveedorRepositorio.findAllByEstadoTrue();
+        response.setCode(200);
+        response.setMsg("Lista de Proveedores");
+        response.setData(proveedores);
+        return response;
+    }
 }

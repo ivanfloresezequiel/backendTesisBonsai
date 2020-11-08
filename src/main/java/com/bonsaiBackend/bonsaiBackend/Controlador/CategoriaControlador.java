@@ -9,22 +9,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
 
+import java.util.List;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping({"/categoria"})
 public class CategoriaControlador {
     @Autowired
     CategoriaServicio categoriaServicio;
-/*
-    @GetMapping
-    public ResponseEntity<Response> listar()  {
-        Response response = null;
 
-            response = categoriaServicio.listarHabilitados();
-        System.out.println(response);
+    @GetMapping("/habilitados")
+    public ResponseEntity<Response> listarHabilitados()  {
+        Response response = categoriaServicio.listarHabilitados();
         return new ResponseEntity<>(response, HttpStatus.OK);
+
+
     }
-    */
+
     @GetMapping
     public ResponseEntity<Response> listar() throws Exception {
         Response response = null;
