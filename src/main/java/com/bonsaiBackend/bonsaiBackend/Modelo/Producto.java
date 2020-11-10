@@ -17,8 +17,7 @@ public class Producto {
     private int codigoBarra;
     @Column
     private Date fechaBaja;
-    @Column
-    private Date fechaLimiteVencimiento;
+
     @Column
     private String presentacion;
     @Column
@@ -31,28 +30,31 @@ public class Producto {
     private int stockActual;
     @Column
     private int stockMinimo;
-    @Column
-    private Date fechaVencimiento;
+@Column
+private Boolean estado;
     @ManyToOne
     @JoinColumn (name = "categoria_id")
-
     private Categoria categoriaID;
+    @ManyToOne
+    @JoinColumn (name = "marca_id")
+    private Marca marcaID;
 
-    public Producto (int codigoBarra, Date fechaBaja, Date fechaLimiteVencimiento,
+    public Producto (int codigoBarra, Date fechaBaja,
                      String presentacion, String productoDescripcion, String productoInformacion,
-                     String nombre, int stockActual, int stockMinimo, Date fechaVencimiento,
-                     Categoria categoriaID){
+                     String nombre, int stockActual, int stockMinimo, Boolean estado,
+                     Categoria categoriaID, Marca marcaID){
         codigoBarra = this.codigoBarra;
         fechaBaja = this.fechaBaja;
-        fechaLimiteVencimiento = this.fechaLimiteVencimiento;
+
         presentacion = this.presentacion;
         productoDescripcion = this.productoDescripcion;
         productoInformacion = this.productoInformacion;
         nombre = this.nombre;
         stockActual = this.stockActual;
         stockMinimo = this.stockMinimo;
-        fechaVencimiento = this.fechaVencimiento;
+        estado = this.estado;
         categoriaID = this.categoriaID;
+        marcaID = this.marcaID;
     }
 
     public Producto(){}
@@ -67,10 +69,7 @@ public class Producto {
 
         this.fechaBaja = fechaBaja;
     }
-    public void setFechaLimiteVencimiento (Date fechaLimiteVencimiento){
 
-        this.fechaLimiteVencimiento = fechaLimiteVencimiento;
-    }
     public void setPresentacion (String presentacion){
 
         this.presentacion = presentacion;
@@ -93,6 +92,22 @@ public class Producto {
         this.categoriaID = categoriaID;
     }
 
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Marca getMarcaID() {
+        return marcaID;
+    }
+
+    public void setMarcaID(Marca marcaID) {
+        this.marcaID = marcaID;
+    }
+
     public void setStockActual (int stockActual){
 
         this.stockActual = stockActual;
@@ -101,10 +116,7 @@ public class Producto {
 
         this.stockMinimo = stockMinimo;
     }
-    public void setFechaVencimiento (Date fechaVencimiento){
 
-        this.fechaVencimiento = fechaVencimiento;
-    }
     public int getId_producto (){
         return id_producto;
     }
@@ -135,12 +147,7 @@ public class Producto {
     public Date getFechaBaja(){
         return fechaBaja;
     }
-    public Date getFechaLimiteVencimiento(){
-        return fechaLimiteVencimiento;
-    }
-    public Date getFechaVencimiento(){
-        return fechaVencimiento;
-    }
+
 
 
 }

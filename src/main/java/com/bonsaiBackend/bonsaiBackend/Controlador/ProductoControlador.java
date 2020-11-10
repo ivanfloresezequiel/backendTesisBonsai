@@ -49,5 +49,12 @@ public class ProductoControlador {
         Response response= productoServicio.editar(producto);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+    @GetMapping("/habilitados")
+    public ResponseEntity<Response> listarHabilitados()  {
+        Response response = productoServicio.ListarHabilitados();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+
+    }
 
 }

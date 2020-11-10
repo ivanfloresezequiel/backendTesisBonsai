@@ -52,4 +52,13 @@ public class ProductoServicio {
         response.setData(productoRepositorio);
         return response;
     }
+
+    public Response ListarHabilitados() {
+        Response response = new Response();
+        List<Producto> productos = productoRepositorio.findAllByEstadoTrue();
+        response.setCode(200);
+        response.setMsg("Lista de Categorias");
+        response.setData(productos);
+        return response;
+    }
 }
