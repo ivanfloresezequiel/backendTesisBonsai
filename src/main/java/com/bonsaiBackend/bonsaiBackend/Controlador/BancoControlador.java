@@ -2,6 +2,8 @@ package com.bonsaiBackend.bonsaiBackend.Controlador;
 
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 
+import com.bonsaiBackend.bonsaiBackend.Modelo.Banco;
+import com.bonsaiBackend.bonsaiBackend.Servicio.BancoServicio;
 import com.bonsaiBackend.bonsaiBackend.Servicio.CategoriaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,14 +15,16 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping({"/categorias"})
-public class CategoriaControlador {
+@RequestMapping({"/bancos"})
+
+
+public class BancoControlador {
     @Autowired
-    CategoriaServicio categoriaServicio;
+    BancoServicio bancoServicio;
 
     @GetMapping("/habilitados")
     public ResponseEntity<Response> listarHabilitados()  {
-        Response response = categoriaServicio.ListarHabilitados();
+        Response response = bancoServicio.ListarHabilitados();
         return new ResponseEntity<>(response, HttpStatus.OK);
 
 
@@ -30,7 +34,7 @@ public class CategoriaControlador {
     public ResponseEntity<Response> listar() throws Exception {
         Response response = null;
         try {
-            response = categoriaServicio.listar();
+            response = bancoServicio.listar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,21 +42,21 @@ public class CategoriaControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Response> guardar(@RequestBody Categoria categoria) throws Exception {
-        Response response = categoriaServicio.guardarCategoria(categoria);
+    public ResponseEntity<Response> guardar(@RequestBody Banco banco) throws Exception {
+        Response response = bancoServicio.guardarBanco(banco);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
 
-        Response response = categoriaServicio.buscarPorId(id);
+        Response response = bancoServicio.buscarPorId(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PutMapping(path={"/{id}"})
-    public ResponseEntity<Response>Editar(@RequestBody Categoria categoria, @PathVariable("id")Integer id){
-        categoria.setId_categoria(id);
-        System.out.println("acavoy");
-        Response response= categoriaServicio.editar(categoria);
+    public ResponseEntity<Response>Editar(@RequestBody Banco banco, @PathVariable("id")Integer id){
+        banco.setId_banco(id);
+        //System.out.println("acavoy");
+        Response response= bancoServicio.editar(banco);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     /*@PutMapping

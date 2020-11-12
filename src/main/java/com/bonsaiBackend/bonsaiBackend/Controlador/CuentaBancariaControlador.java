@@ -2,7 +2,9 @@ package com.bonsaiBackend.bonsaiBackend.Controlador;
 
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 
+import com.bonsaiBackend.bonsaiBackend.Modelo.CuentaBancaria;
 import com.bonsaiBackend.bonsaiBackend.Servicio.CategoriaServicio;
+import com.bonsaiBackend.bonsaiBackend.Servicio.CuentaBancariaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +15,14 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping({"/categorias"})
-public class CategoriaControlador {
+@RequestMapping({"/cuentas_bancarias"})
+public class CuentaBancariaControlador {
     @Autowired
-    CategoriaServicio categoriaServicio;
+    CuentaBancariaServicio cuentaBancariaServicio;
 
     @GetMapping("/habilitados")
     public ResponseEntity<Response> listarHabilitados()  {
-        Response response = categoriaServicio.ListarHabilitados();
+        Response response = cuentaBancariaServicio.ListarHabilitados();
         return new ResponseEntity<>(response, HttpStatus.OK);
 
 
@@ -30,7 +32,7 @@ public class CategoriaControlador {
     public ResponseEntity<Response> listar() throws Exception {
         Response response = null;
         try {
-            response = categoriaServicio.listar();
+            response = cuentaBancariaServicio.listar();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -38,21 +40,21 @@ public class CategoriaControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Response> guardar(@RequestBody Categoria categoria) throws Exception {
-        Response response = categoriaServicio.guardarCategoria(categoria);
+    public ResponseEntity<Response> guardar(@RequestBody CuentaBancaria cuentaBancaria) throws Exception {
+        Response response = cuentaBancariaServicio.guardarCuentaBancaria(cuentaBancaria);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
 
-        Response response = categoriaServicio.buscarPorId(id);
+        Response response = cuentaBancariaServicio.buscarPorId(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PutMapping(path={"/{id}"})
-    public ResponseEntity<Response>Editar(@RequestBody Categoria categoria, @PathVariable("id")Integer id){
-        categoria.setId_categoria(id);
-        System.out.println("acavoy");
-        Response response= categoriaServicio.editar(categoria);
+    public ResponseEntity<Response>Editar(@RequestBody CuentaBancaria cuentaBancaria, @PathVariable("id")Integer id){
+        cuentaBancaria.setId_cuentaBancaria(id);
+        //System.out.println("acavoy");
+        Response response= cuentaBancariaServicio.editar(cuentaBancaria);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     /*@PutMapping
@@ -60,5 +62,4 @@ public class CategoriaControlador {
         Response response = categoriaServicio.actualizarCategoria(categoria);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }*/
-
 }

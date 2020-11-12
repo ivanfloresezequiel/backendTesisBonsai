@@ -30,19 +30,22 @@ public class Producto {
     private int stockActual;
     @Column
     private int stockMinimo;
-@Column
-private Boolean estado;
+    @Column
+    private Boolean estado;
     @ManyToOne
     @JoinColumn (name = "categoria_id")
     private Categoria categoriaID;
     @ManyToOne
     @JoinColumn (name = "marca_id")
     private Marca marcaID;
+    @ManyToOne
+    @JoinColumn (name = "presentacion_id")
+    private Presentacion presentacionID;
 
     public Producto (int codigoBarra, Date fechaBaja,
                      String presentacion, String productoDescripcion, String productoInformacion,
                      String nombre, int stockActual, int stockMinimo, Boolean estado,
-                     Categoria categoriaID, Marca marcaID){
+                     Categoria categoriaID, Marca marcaID, Presentacion presentacionID){
         codigoBarra = this.codigoBarra;
         fechaBaja = this.fechaBaja;
 
@@ -55,6 +58,7 @@ private Boolean estado;
         estado = this.estado;
         categoriaID = this.categoriaID;
         marcaID = this.marcaID;
+        presentacionID = this.presentacionID;
     }
 
     public Producto(){}
@@ -74,6 +78,15 @@ private Boolean estado;
 
         this.presentacion = presentacion;
     }
+
+    public Presentacion getPresentacionID() {
+        return presentacionID;
+    }
+
+    public void setPresentacionID(Presentacion presentacionID) {
+        this.presentacionID = presentacionID;
+    }
+
     public void setProductoDescripcion (String productoDescripcion){
 
         this.productoDescripcion = productoDescripcion;

@@ -42,11 +42,14 @@ public class Proveedor implements Serializable {
     private String whatsapp;
     @Column
     private Boolean estado;
+    @ManyToOne
+    @JoinColumn (name = "cuentaBancaria_id")
+    private CuentaBancaria cuentaBancariaID;
 
 
     public Proveedor(double cuit, String direccion, String mail, String nombre,
                      String razon_social, String telefono_fijo,
-                     String whatsapp){
+                     String whatsapp, CuentaBancaria cuentaBancariaID){
             cuit = this.cuit;
             direccion = this.direccion;
             mail = this.mail;
@@ -55,6 +58,7 @@ public class Proveedor implements Serializable {
             telefono_fijo = this.telefono_fijo;
             whatsapp = this.whatsapp;
             estado = true;
+            cuentaBancariaID = this.cuentaBancariaID;
     }
 
     public void setEstado(Boolean estado) {
@@ -66,6 +70,14 @@ public class Proveedor implements Serializable {
     }
 
     public Proveedor(){}
+
+    public CuentaBancaria getCuentaBancariaID() {
+        return cuentaBancariaID;
+    }
+
+    public void setCuentaBancariaID(CuentaBancaria cuentaBancariaID) {
+        this.cuentaBancariaID = cuentaBancariaID;
+    }
 
     public void setCuit(double cuit) {
         this.cuit = cuit;

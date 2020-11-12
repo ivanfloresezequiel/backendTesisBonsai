@@ -20,9 +20,10 @@ public class Marca {
 
     }
 
-    public Marca(String nombre, String descripcion) {
+    public Marca(String nombre, String descripcion, boolean estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.estado = estado;
     }
 
     public int getId_marca() {
@@ -43,6 +44,14 @@ public class Marca {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     public void setDescripcion(String descripcion) {
