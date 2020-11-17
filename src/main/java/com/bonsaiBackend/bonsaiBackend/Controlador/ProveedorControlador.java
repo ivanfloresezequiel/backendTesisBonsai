@@ -2,19 +2,13 @@ package com.bonsaiBackend.bonsaiBackend.Controlador;
 
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 
-import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
-import com.bonsaiBackend.bonsaiBackend.Modelo.Producto;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Proveedor;
-import com.bonsaiBackend.bonsaiBackend.Servicio.ProductoServicio;
 
 import com.bonsaiBackend.bonsaiBackend.Servicio.ProveedorServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.bonsaiBackend.bonsaiBackend.Modelo.Producto;
-
-import java.io.Serializable;
 
 @CrossOrigin("*")
 @RestController
@@ -46,12 +40,11 @@ public ResponseEntity<Response> listarHabilitados(){
     }
     @GetMapping("/{id}")
     public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
-
         Response response = proveedorServicio.buscarPorId(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PutMapping(path={"/{id}"})
-    public ResponseEntity<Response>Editar(@RequestBody Proveedor proveedor, @PathVariable("id")Integer id){
+    public ResponseEntity<Response>Editar(@RequestBody Proveedor proveedor, @PathVariable("id") int id){
         proveedor.setId_proveedor(id);
         //System.out.println("acavoy");
         Response response= proveedorServicio.editar(proveedor);

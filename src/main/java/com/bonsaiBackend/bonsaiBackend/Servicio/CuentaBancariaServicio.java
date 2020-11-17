@@ -1,14 +1,17 @@
 package com.bonsaiBackend.bonsaiBackend.Servicio;
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
+import com.bonsaiBackend.bonsaiBackend.DTO.cuentaBancariaDTO;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Banco;
 
 
 import com.bonsaiBackend.bonsaiBackend.Modelo.CuentaBancaria;
+import com.bonsaiBackend.bonsaiBackend.Modelo.Proveedor;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.BancoRepositorio;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.CategoriaRepositorio;
 
 
 import com.bonsaiBackend.bonsaiBackend.Repositorio.CuentaBancariaRepositorio;
+import com.bonsaiBackend.bonsaiBackend.Repositorio.ProveedorRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +25,10 @@ public class CuentaBancariaServicio {
 
     @Autowired
     CuentaBancariaRepositorio cuentaBancariaRepositorio;
-
+    @Autowired
+    BancoRepositorio bancoRepositorio;
+    @Autowired
+    ProveedorRepositorio proveedorRepositorio;
 
 
     public Response listar() throws Exception {
@@ -36,7 +42,26 @@ public class CuentaBancariaServicio {
         response.setData(cuentasBancarias);
         return response;
     }
+/*
+    public Response guardarCuentaBancaria(cuentaBancariaDTO cuentaBancariaDTO) throws Exception {
+        Response response = new Response();
 
+
+
+        CuentaBancaria cuentaBancaria = new CuentaBancaria(cuentaBancariaDTO.getCbu(),
+                cuentaBancariaDTO.getTipoCuenta(),cuentaBancariaDTO.isEstado(),
+               cuentaBancariaDTO.getIdBanco().getId_banco(),cuentaBancariaDTO.getIdProveedor().getId_proveedor());
+        System.out.println("acaBoy");
+        CuentaBancaria cuentaBancariaToSave = cuentaBancariaRepositorio.save(cuentaBancaria);
+
+        if (cuentaBancariaToSave == null)
+            throw new Exception();
+        response.setCode(200);
+        response.setMsg("Cuenta Bancaria Guardado Exitosamente");
+        response.setData(cuentaBancariaToSave);
+        return response;
+    }
+*/
     public Response guardarCuentaBancaria(CuentaBancaria cuentaBancaria) throws Exception {
         Response response = new Response();
 

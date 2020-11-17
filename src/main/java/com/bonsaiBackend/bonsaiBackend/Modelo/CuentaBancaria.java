@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name="cuenta_bancaria")
@@ -17,20 +16,24 @@ public class CuentaBancaria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_cuentaBancaria;
     @Column
-    private String CBU;
+    private String cbu;
     @Column
     private String tipoCuenta;
     @Column
     private boolean estado;
     @ManyToOne
-    @JoinColumn (name = "banco_id")
+    @JoinColumn (name = "id_banco")
     private Banco bancoID;
+    @ManyToOne
+    @JoinColumn (name = "id_proveedor")
+    private Proveedor proveedorID;
 
-    public CuentaBancaria(String CBU, String tipoCuenta, boolean estado, Banco bancoID) {
-        this.CBU = CBU;
+    public CuentaBancaria(String cbu, String tipoCuenta, boolean estado, Banco bancoID, Proveedor proveedorID) {
+        this.cbu = cbu;
         this.tipoCuenta = tipoCuenta;
         this.estado = estado;
         this.bancoID = bancoID;
+        this.proveedorID = proveedorID;
     }
 
     public CuentaBancaria() {
@@ -44,12 +47,12 @@ public class CuentaBancaria {
         this.id_cuentaBancaria = id_cuentaBancaria;
     }
 
-    public String getCBU() {
-        return CBU;
+    public String getCbu() {
+        return cbu;
     }
 
-    public void setCBU(String CBU) {
-        this.CBU = CBU;
+    public void setCbu(String cbu) {
+        this.cbu = cbu;
     }
 
     public String getTipoCuenta() {
@@ -62,6 +65,14 @@ public class CuentaBancaria {
 
     public boolean isEstado() {
         return estado;
+    }
+
+    public Proveedor getProveedorID() {
+        return proveedorID;
+    }
+
+    public void setProveedorID(Proveedor proveedorID) {
+        this.proveedorID = proveedorID;
     }
 
     public void setEstado(boolean estado) {

@@ -2,7 +2,9 @@ package com.bonsaiBackend.bonsaiBackend.Controlador;
 
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 
+import com.bonsaiBackend.bonsaiBackend.DTO.cuentaBancariaDTO;
 import com.bonsaiBackend.bonsaiBackend.Modelo.CuentaBancaria;
+import com.bonsaiBackend.bonsaiBackend.Servicio.BancoServicio;
 import com.bonsaiBackend.bonsaiBackend.Servicio.CategoriaServicio;
 import com.bonsaiBackend.bonsaiBackend.Servicio.CuentaBancariaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,19 @@ import java.util.List;
 public class CuentaBancariaControlador {
     @Autowired
     CuentaBancariaServicio cuentaBancariaServicio;
+    @Autowired
+    BancoServicio bancoServicio;
 
     @GetMapping("/habilitados")
     public ResponseEntity<Response> listarHabilitados()  {
         Response response = cuentaBancariaServicio.ListarHabilitados();
         return new ResponseEntity<>(response, HttpStatus.OK);
 
-
     }
 
     @GetMapping
     public ResponseEntity<Response> listar() throws Exception {
+
         Response response = null;
         try {
             response = cuentaBancariaServicio.listar();
@@ -39,11 +43,15 @@ public class CuentaBancariaControlador {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
     @PostMapping
     public ResponseEntity<Response> guardar(@RequestBody CuentaBancaria cuentaBancaria) throws Exception {
+        System.out.println("entreaGuardar");
+
         Response response = cuentaBancariaServicio.guardarCuentaBancaria(cuentaBancaria);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
 

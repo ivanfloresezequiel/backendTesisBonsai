@@ -4,14 +4,10 @@ import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 
 import com.bonsaiBackend.bonsaiBackend.Modelo.Banco;
 import com.bonsaiBackend.bonsaiBackend.Servicio.BancoServicio;
-import com.bonsaiBackend.bonsaiBackend.Servicio.CategoriaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
-
-import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -48,14 +44,13 @@ public class BancoControlador {
     }
     @GetMapping("/{id}")
     public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
-
         Response response = bancoServicio.buscarPorId(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @PutMapping(path={"/{id}"})
-    public ResponseEntity<Response>Editar(@RequestBody Banco banco, @PathVariable("id")Integer id){
+    public ResponseEntity<Response>Editar(@RequestBody Banco banco, @PathVariable("id") int id){
         banco.setId_banco(id);
-        //System.out.println("acavoy");
+        ;
         Response response= bancoServicio.editar(banco);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

@@ -18,6 +18,7 @@ public class CategoriaControlador {
     @Autowired
     CategoriaServicio categoriaServicio;
 
+
     @GetMapping("/habilitados")
     public ResponseEntity<Response> listarHabilitados()  {
         Response response = categoriaServicio.ListarHabilitados();
@@ -25,7 +26,6 @@ public class CategoriaControlador {
 
 
     }
-
     @GetMapping
     public ResponseEntity<Response> listar() throws Exception {
         Response response = null;
