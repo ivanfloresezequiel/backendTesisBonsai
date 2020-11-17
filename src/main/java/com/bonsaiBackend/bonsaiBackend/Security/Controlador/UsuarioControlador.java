@@ -1,6 +1,8 @@
 package com.bonsaiBackend.bonsaiBackend.Security.Controlador;
 
 import com.bonsaiBackend.bonsaiBackend.DTO.Mensaje;
+import com.bonsaiBackend.bonsaiBackend.DTO.Response;
+import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
 import com.bonsaiBackend.bonsaiBackend.Security.DTO.JwtDTO;
 import com.bonsaiBackend.bonsaiBackend.Security.DTO.LoginUsuario;
 import com.bonsaiBackend.bonsaiBackend.Security.DTO.NuevoUsuario;
@@ -81,5 +83,24 @@ public class UsuarioControlador {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         JwtDTO jwtDTO = new JwtDTO(jwt, userDetails.getUsername(), userDetails.getAuthorities());
         return new ResponseEntity(jwtDTO, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Response> listar() throws Exception {
+        Response response = null;
+        try {
+            response = usuarioServicio.listar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response> listarPorId(@PathVariable("id") Integer id) throws Exception {
+
+        Response response = usuarioServicio.buscarPorId(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
