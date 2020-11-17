@@ -52,7 +52,7 @@ public class ProveedorServicio {
     public Response editar(Proveedor proveedor){
         Response response = new Response();
         Proveedor proveedorGuardado = proveedorRepositorio.save(proveedor);
-        response.setData(proveedorRepositorio);
+        response.setData(proveedorGuardado);
         return response;
     }
     public Response buscarHabilitados(){
