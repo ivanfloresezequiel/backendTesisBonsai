@@ -1,5 +1,6 @@
 package com.bonsaiBackend.bonsaiBackend.Controlador;
 
+import com.bonsaiBackend.bonsaiBackend.DTO.ProductoDTO;
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 
 import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
@@ -32,7 +33,8 @@ public class ProductoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Response> guardar(@RequestBody Producto producto) throws Exception {
+    public ResponseEntity<Response> guardar(@RequestBody ProductoDTO producto) throws Exception {
+
         Response response = productoServicio.guardarProducto(producto);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -53,8 +55,6 @@ public class ProductoControlador {
     public ResponseEntity<Response> listarHabilitados()  {
         Response response = productoServicio.ListarHabilitados();
         return new ResponseEntity<>(response, HttpStatus.OK);
-
-
     }
 
 }

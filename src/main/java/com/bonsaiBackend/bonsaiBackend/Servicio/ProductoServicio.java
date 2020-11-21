@@ -1,8 +1,12 @@
 package com.bonsaiBackend.bonsaiBackend.Servicio;
 
+import com.bonsaiBackend.bonsaiBackend.DTO.ProductoDTO;
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
+import com.bonsaiBackend.bonsaiBackend.Modelo.Marca;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Producto;
+import com.bonsaiBackend.bonsaiBackend.Repositorio.CategoriaRepositorio;
+import com.bonsaiBackend.bonsaiBackend.Repositorio.MarcaRepositorio;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.ProductoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +18,10 @@ import java.util.Optional;
 public class ProductoServicio {
     @Autowired
     ProductoRepositorio productoRepositorio;
+    @Autowired
+    CategoriaRepositorio categoriaRepositorio;
+    @Autowired
+    MarcaRepositorio marcaRepositorio;
 
 
     public Response listar() throws Exception {
@@ -28,9 +36,9 @@ public class ProductoServicio {
         return response;
     }
 
-    public Response guardarProducto(Producto producto) throws Exception {
+    public Response guardarProducto(ProductoDTO productoDTO) throws Exception {
         Response response = new Response();
-
+        Producto producto =  mapDTOtoEntity(productoDTO);
         Producto productoToSave = productoRepositorio.save(producto);
 
         if (productoToSave == null)
@@ -60,5 +68,25 @@ public class ProductoServicio {
         response.setMsg("Lista de Categorias");
         response.setData(productos);
         return response;
+    }
+    public Producto mapDTOtoEntity(ProductoDTO productoDTO){
+        Producto producto = new Producto();
+        producto.setNombre(productoDTO.getNombre());
+        producto.setCodigoBarra(productoDTO.getCodigoBarra());
+        producto.setPresentacion(productoDTO.getPresentacion());
+        producto.setProductoDescripcion(productoDTO.getProductoDescripcion());
+        producto.setProductoInformacion(productoDTO.getProductoInformacion());
+        producto.setStockMinimo(productoDTO.getStockMinimo());
+        producto.setEstado(true);
+
+        Categoria categoria = this.categoriaRepositorio.findById(productoDTO.getCategoriaID()).get();
+        Marca marca = this.marcaRepositorio.findById(productoDTO.getMarcaID()).get();
+
+
+        producto.setMarcaID(marca);
+        producto.setCategoriaID(categoria);
+
+
+        return producto;
     }
 }

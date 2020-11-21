@@ -17,7 +17,6 @@ public class Producto {
     private int codigoBarra;
     @Column
     private Date fechaBaja;
-
     @Column
     private String presentacion;
     @Column

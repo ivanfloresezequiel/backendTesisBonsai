@@ -54,6 +54,7 @@ public class UsuarioControlador {
 
     @PostMapping("/nuevo")
     public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
+
         if(bindingResult.hasErrors())
             return new ResponseEntity(new Mensaje("Campos mal puestos o mail inválido"), HttpStatus.BAD_REQUEST);
        /* if(usuarioServicio.existsByNombreUsuario(nuevoUsuario.getNombreUsuario()))
