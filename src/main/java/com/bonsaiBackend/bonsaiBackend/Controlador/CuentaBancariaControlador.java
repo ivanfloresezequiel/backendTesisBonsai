@@ -45,7 +45,7 @@ public class CuentaBancariaControlador {
 
 
     @PostMapping
-    public ResponseEntity<Response> guardar(@RequestBody CuentaBancaria cuentaBancaria) throws Exception {
+    public ResponseEntity<Response> guardar(@RequestBody cuentaBancariaDTO cuentaBancaria) throws Exception {
         System.out.println("entreaGuardar");
 
         Response response = cuentaBancariaServicio.guardarCuentaBancaria(cuentaBancaria);

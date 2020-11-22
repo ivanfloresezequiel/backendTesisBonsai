@@ -1,11 +1,10 @@
 package com.bonsaiBackend.bonsaiBackend.Servicio;
+import com.bonsaiBackend.bonsaiBackend.DTO.ProductoDTO;
 import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 import com.bonsaiBackend.bonsaiBackend.DTO.cuentaBancariaDTO;
-import com.bonsaiBackend.bonsaiBackend.Modelo.Banco;
+import com.bonsaiBackend.bonsaiBackend.Modelo.*;
 
 
-import com.bonsaiBackend.bonsaiBackend.Modelo.CuentaBancaria;
-import com.bonsaiBackend.bonsaiBackend.Modelo.Proveedor;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.BancoRepositorio;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.CategoriaRepositorio;
 
@@ -62,9 +61,9 @@ public class CuentaBancariaServicio {
         return response;
     }
 */
-    public Response guardarCuentaBancaria(CuentaBancaria cuentaBancaria) throws Exception {
+    public Response guardarCuentaBancaria(cuentaBancariaDTO cuentaBancariaDTO) throws Exception {
         Response response = new Response();
-
+        CuentaBancaria cuentaBancaria = mapDTOtoEntity(cuentaBancariaDTO);
         CuentaBancaria cuentaBancariaToSave = cuentaBancariaRepositorio.save(cuentaBancaria);
 
         if (cuentaBancariaToSave == null)
@@ -73,6 +72,24 @@ public class CuentaBancariaServicio {
         response.setMsg("Cuenta Bancaria Guardado Exitosamente");
         response.setData(cuentaBancariaToSave);
         return response;
+    }
+
+    private CuentaBancaria mapDTOtoEntity(cuentaBancariaDTO cuentaBancariaDTO) {
+            CuentaBancaria cuentaBancaria = new CuentaBancaria();
+
+            cuentaBancaria.setCbu(cuentaBancariaDTO.getCbu());
+            cuentaBancaria.setTipoCuenta(cuentaBancariaDTO.getTipoCuenta());
+
+            cuentaBancaria.setEstado(true);
+
+            Banco banco = this.bancoRepositorio.findById(cuentaBancariaDTO.getIdBanco()).get();
+            Proveedor proveedor = this.proveedorRepositorio.findById(cuentaBancariaDTO.getIdProveedor()).get();
+            cuentaBancaria.setBancoID(banco);
+            cuentaBancaria.setProveedorID(proveedor);
+
+
+            return cuentaBancaria;
+
     }
 
     public Response buscarPorId(int id){

@@ -8,20 +8,12 @@ public class cuentaBancariaDTO {
     private String cbu;
     private String tipoCuenta;
     private boolean estado;
-    private Banco idBanco;
-    private Proveedor idProveedor;
+    private int idBanco;
+    private int idProveedor;
 
-    public cuentaBancariaDTO( String cbu, String tipoCuenta, boolean estado, Banco idBanco, Proveedor idProveedor) {
 
-        this.cbu = cbu;
-        this.tipoCuenta = tipoCuenta;
-        this.estado = estado;
-        this.idBanco = idBanco;
-        this.idProveedor = idProveedor;
-    }
 
-    public cuentaBancariaDTO() {
-    }
+
 
     public int getId_cuentaBancaria() {
         return id_cuentaBancaria;
@@ -55,19 +47,19 @@ public class cuentaBancariaDTO {
         this.estado = estado;
     }
 
-    public Banco getIdBanco() {
+    public int getIdBanco() {
         return idBanco;
     }
 
-    public void setIdBanco(Banco idBanco) {
+    public void setIdBanco(int idBanco) {
         this.idBanco = idBanco;
     }
 
-    public Proveedor getIdProveedor() {
+    public int getIdProveedor() {
         return idProveedor;
     }
 
-    public void setIdProveedor(Proveedor idProveedor) {
+    public void setIdProveedor(int idProveedor) {
         this.idProveedor = idProveedor;
     }
 }

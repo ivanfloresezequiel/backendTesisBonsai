@@ -40,6 +40,9 @@ public class Producto {
     @ManyToOne
     @JoinColumn (name = "presentacion_id")
     private Presentacion presentacionID;
+    @ManyToMany
+    @JoinColumn (name = "presentacion_id")
+    private Proveedor proveedorID;
 
     public Producto (int codigoBarra, Date fechaBaja,
                      String presentacion, String productoDescripcion, String productoInformacion,
