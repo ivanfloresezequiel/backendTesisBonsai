@@ -1,10 +1,15 @@
 package com.bonsaiBackend.bonsaiBackend.Modelo;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+
+import com.bonsaiBackend.bonsaiBackend.Security.Modelo.Rol;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="producto")
@@ -40,14 +45,16 @@ public class Producto {
     @ManyToOne
     @JoinColumn (name = "presentacion_id")
     private Presentacion presentacionID;
-    @ManyToMany
-    @JoinColumn (name = "presentacion_id")
-    private Proveedor proveedorID;
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable (name = "producto_proveedor", joinColumns ={ @JoinColumn(name = "id_producto")},
+            inverseJoinColumns = {@JoinColumn (name = "id_proveedor")})
+    private Set<Proveedor> proveedores = new HashSet<>();
 
-    public Producto (int codigoBarra, Date fechaBaja,
-                     String presentacion, String productoDescripcion, String productoInformacion,
-                     String nombre, int stockActual, int stockMinimo, Boolean estado,
-                     Categoria categoriaID, Marca marcaID, Presentacion presentacionID){
+    public Producto(int codigoBarra, Date fechaBaja,
+                    String presentacion, String productoDescripcion, String productoInformacion,
+                    String nombre, int stockActual, int stockMinimo, Boolean estado,
+                    Categoria categoriaID, Marca marcaID, Presentacion presentacionID){
+
         codigoBarra = this.codigoBarra;
         fechaBaja = this.fechaBaja;
 

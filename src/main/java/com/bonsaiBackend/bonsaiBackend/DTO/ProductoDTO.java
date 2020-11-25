@@ -16,6 +16,15 @@ public class ProductoDTO {
     private  int categoriaID;
     private  int marcaID;
     private  int   presentacionID;
+    private int proveedoresID[];
+
+    public int[] getProveedoresID() {
+        return proveedoresID;
+    }
+
+    public void setProveedoresID(int[] proveedoresID) {
+        this.proveedoresID = proveedoresID;
+    }
 
     public int getId_producto() {
         return id_producto;

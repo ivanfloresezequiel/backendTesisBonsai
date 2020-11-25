@@ -5,14 +5,19 @@ import com.bonsaiBackend.bonsaiBackend.DTO.Response;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Categoria;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Marca;
 import com.bonsaiBackend.bonsaiBackend.Modelo.Producto;
+import com.bonsaiBackend.bonsaiBackend.Modelo.Proveedor;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.CategoriaRepositorio;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.MarcaRepositorio;
 import com.bonsaiBackend.bonsaiBackend.Repositorio.ProductoRepositorio;
+import com.bonsaiBackend.bonsaiBackend.Repositorio.ProveedorRepositorio;
+import com.bonsaiBackend.bonsaiBackend.Security.Modelo.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductoServicio {
@@ -22,6 +27,8 @@ public class ProductoServicio {
     CategoriaRepositorio categoriaRepositorio;
     @Autowired
     MarcaRepositorio marcaRepositorio;
+    @Autowired
+    ProveedorRepositorio proveedorRepositorio;
 
 
     public Response listar() throws Exception {
@@ -86,6 +93,11 @@ public class ProductoServicio {
         producto.setMarcaID(marca);
         producto.setCategoriaID(categoria);
 
+        Set<Proveedor> proveedores = new HashSet<>();
+        for (int producto1:productoDTO.getProveedoresID()) {
+
+                proveedores.add(this.proveedorRepositorio.findById(producto1).get());
+        }
 
         return producto;
     }
