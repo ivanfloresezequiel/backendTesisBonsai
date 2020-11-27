@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="proveedor")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Proveedor implements Serializable {
+
+public class Proveedor {
 
     /*DIRECCION	varchar(200)
     MAIL	varchar(100)

@@ -98,7 +98,7 @@ public class ProductoServicio {
 
                 proveedores.add(this.proveedorRepositorio.findById(producto1).get());
         }
-
+        producto.setProveedores(proveedores);
         return producto;
     }
 }

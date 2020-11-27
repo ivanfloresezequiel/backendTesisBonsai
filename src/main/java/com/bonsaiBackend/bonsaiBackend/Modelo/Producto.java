@@ -1,6 +1,7 @@
 package com.bonsaiBackend.bonsaiBackend.Modelo;
 
 import com.bonsaiBackend.bonsaiBackend.Security.Modelo.Rol;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -36,6 +37,11 @@ public class Producto {
     private int stockMinimo;
     @Column
     private Boolean estado;
+    @NotNull
+    @ManyToMany ()
+    @JoinTable (name = "producto_proveedor", joinColumns = @JoinColumn(name = "id_producto"),
+            inverseJoinColumns = @JoinColumn (name = "id_proveedor"))
+    private Set<Proveedor> proveedores = new HashSet<>();
     @ManyToOne
     @JoinColumn (name = "categoria_id")
     private Categoria categoriaID;
@@ -45,10 +51,7 @@ public class Producto {
     @ManyToOne
     @JoinColumn (name = "presentacion_id")
     private Presentacion presentacionID;
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable (name = "producto_proveedor", joinColumns ={ @JoinColumn(name = "id_producto")},
-            inverseJoinColumns = {@JoinColumn (name = "id_proveedor")})
-    private Set<Proveedor> proveedores = new HashSet<>();
+
 
     public Producto(int codigoBarra, Date fechaBaja,
                     String presentacion, String productoDescripcion, String productoInformacion,
@@ -107,6 +110,14 @@ public class Producto {
     public void setNombre (String nombre){
 
         this.nombre = nombre;
+    }
+
+    public Set<Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(Set<Proveedor> proveedores) {
+        this.proveedores = proveedores;
     }
 
     public void setCategoriaID(Categoria categoriaID) {
